@@ -15,12 +15,40 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Future<PaginatedCharacters>? characters;
+  List<Character> characters = [];
+  int currentPage = 1;
+  bool isLoading = false;
+  bool isLastPage = false;
+  final ScrollController _scrollController = ScrollController();
 
   @override
-  initState() {
-    characters = Repository.getCharacters();
+  void initState() {
     super.initState();
+    fetchCharacters();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels >=
+              _scrollController.position.maxScrollExtent - 200 &&
+          !isLoading &&
+          !isLastPage) {
+        fetchCharacters();
+      }
+    });
+  }
+
+  Future<void> fetchCharacters() async {
+    setState(() => isLoading = true);
+    try {
+      final result = await Repository.getCharacters(page: currentPage);
+      setState(() {
+        characters.addAll(result.results);
+        currentPage++;
+        isLastPage = result.next == null;
+      });
+    } catch (e) {
+      print('fetchCharacters: ERRO: ${e.toString()}');
+    } finally {
+      setState(() => isLoading = false);
+    }
   }
 
   @override
@@ -28,39 +56,20 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: appBarComponent(context),
       backgroundColor: AppColors.backgroundColor,
-      body: FutureBuilder(
-        future: characters,
-        builder: (context, AsyncSnapshot<PaginatedCharacters> snapshot) {
-          if (snapshot.hasData) {
-            final dataResults = snapshot.data!.results;
-            print('dataResults: $dataResults');
-            var length = dataResults.length;
-            print('dataResults.length: $length');
-            return ListView.builder(
-              itemCount: dataResults.length,
-              padding: const EdgeInsets.symmetric(vertical: 7.5),
-              itemBuilder: (context, index) {
-                return CharacterCard(
-                  character: dataResults[index],
-                  onTap: () {
-                    Navigator.of(context).pushNamed(
-                      DetailsPage.routeId,
-                      arguments: dataResults[index].id,
-                    );
-                  },
+      body: ListView.builder(
+        controller: _scrollController,
+        itemCount: characters.length + (isLoading ? 1 : 0),
+        padding: const EdgeInsets.symmetric(vertical: 7.5),
+        itemBuilder: (context, index) {
+          if (index < characters.length) {
+            return CharacterCard(
+              character: characters[index],
+              onTap: () {
+                Navigator.of(context).pushNamed(
+                  DetailsPage.routeId,
+                  arguments: characters[index].id,
                 );
               },
-            );
-          } else if (snapshot.hasError) {
-            print("snapshot.hasError");
-            print('Ocorreu um erro: $snapshot');
-            print('$snapshot.error.toString()');
-            return Center(
-              child: Text(
-                // "Ocorreu um erro.",
-                snapshot.error.toString(),
-                style: TextStyle(color: AppColors.white),
-              ),
             );
           } else {
             return const Center(child: CircularProgressIndicator());

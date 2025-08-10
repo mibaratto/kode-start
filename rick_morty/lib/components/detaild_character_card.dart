@@ -1,15 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:rick_morty/models/detailed_character.dart';
 import 'package:rick_morty/theme/app_colors.dart';
+import 'package:dio/dio.dart';
 
-class DetailedCharacterCard extends StatelessWidget {
+class DetailedCharacterCard extends StatefulWidget {
   const DetailedCharacterCard({required this.detailedCharacter, Key? key})
     : super(key: key);
 
   final DetailedCharacter detailedCharacter;
 
   @override
+  State<DetailedCharacterCard> createState() => _DetailedCharacterCardState();
+}
+
+class _DetailedCharacterCardState extends State<DetailedCharacterCard> {
+  String? episodeName;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchEpisodeName();
+  }
+
+  Future<void> fetchEpisodeName() async {
+    try {
+      final response = await Dio().get(widget.detailedCharacter.episodePath);
+      setState(() {
+        episodeName = response.data['name'];
+      });
+    } catch (e) {
+      setState(() {
+        episodeName = 'Erro ao carregar episódio';
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final character = widget.detailedCharacter;
+
     return Card(
       color: AppColors.primaryColorLight,
       clipBehavior: Clip.antiAlias,
@@ -21,9 +50,8 @@ class DetailedCharacterCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.network(
-            detailedCharacter.image,
+            character.image,
             width: double.infinity, // ocupa toda a largura do card
-            // height: 200, // altura fixa (ajuste conforme necessário)
             fit: BoxFit.cover,
           ),
           Padding(
@@ -37,7 +65,7 @@ class DetailedCharacterCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "name: ${detailedCharacter.name.toUpperCase()}",
+                  "name: ${character.name.toUpperCase()}",
                   style: TextStyle(
                     color: AppColors.white,
                     fontWeight: FontWeight.w900,
@@ -45,42 +73,38 @@ class DetailedCharacterCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 15),
-                // Wrap(
-                //   spacing: 10,
-                //   runSpacing: 10,
-                //   children: detailedCharacter.genres
-                //       .map(
-                //         (genre) => Chip(
-                //           backgroundColor: AppColors.primaryColorLight,
-                //           labelStyle: TextStyle(color: AppColors.white),
-                //           side: BorderSide(color: AppColors.white),
-                //           label: Text(genre.name),
-                //         ),
-                //       )
-                //       .toList(),
-                // ),
-                const SizedBox(height: 15),
                 Text(
-                  detailedCharacter.name,
+                  "species: ${character.species.toUpperCase()}",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 12.5,
                     color: AppColors.white,
                   ),
                 ),
-                const SizedBox(height: 15),
                 Text(
-                  'Production Companies:',
-                  style: TextStyle(fontSize: 12.5, color: AppColors.white),
+                  "gender: ${character.gender.toUpperCase()}",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12.5,
+                    color: AppColors.white,
+                  ),
                 ),
-                // Text(
-                //   allCompanies,
-                //   style: TextStyle(
-                //     fontWeight: FontWeight.bold,
-                //     fontSize: 12.5,
-                //     color: AppColors.white,
-                //   ),
-                // ),
+                Text(
+                  "status: ${character.status.toUpperCase()}",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12.5,
+                    color: AppColors.white,
+                  ),
+                ),
+                Text(
+                  "first episode: ${episodeName ?? 'Carregando episódio...'}",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12.5,
+                    color: AppColors.white,
+                  ),
+                ),
               ],
             ),
           ),
