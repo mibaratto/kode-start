@@ -10,15 +10,6 @@ class DetailedCharacterCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final date = DateTime.parse(detailedCharacter.releaseDate);
-
-    // final companieNames = detailedCharacter.productionCompanies.map(
-    //   (company) => company.name,
-    // );
-    // final allCompanies = companieNames.reduce(
-    //   (value, element) => value + ', ' + element,
-    // );
-
     return Card(
       color: AppColors.primaryColorLight,
       clipBehavior: Clip.antiAlias,
@@ -31,7 +22,9 @@ class DetailedCharacterCard extends StatelessWidget {
         children: [
           Image.network(
             detailedCharacter.image,
-            // "https://image.tmdb.org/t/p/w1000_and_h450_multi_faces${detailedCharacter.backdropPath}",
+            width: double.infinity, // ocupa toda a largura do card
+            // height: 200, // altura fixa (ajuste conforme necessário)
+            fit: BoxFit.cover,
           ),
           Padding(
             padding: const EdgeInsets.only(

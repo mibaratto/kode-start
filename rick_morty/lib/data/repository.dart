@@ -8,9 +8,7 @@ abstract class Repository {
   );
 
   static Future<PaginatedCharacters> getCharacters() async {
-    print("api");
     var response = await _dio.get("/character");
-    print(response);
     return PaginatedCharacters.fromJson(response.data);
   }
 

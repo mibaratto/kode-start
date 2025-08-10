@@ -25,12 +25,13 @@ class CharacterCard extends StatelessWidget {
           children: [
             Image.network(
               character.image,
-              // "https://image.tmdb.org/t/p/w1000_and_h450_multi_faces${character.backdropPath}",
+              width: double.infinity, // ocupa toda a largura do card
+              fit: BoxFit.cover,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               child: Text(
-                "name: ${character.name.toUpperCase()}",
+                character.name.toUpperCase(),
                 style: TextStyle(
                   color: AppColors.white,
                   fontWeight: FontWeight.w900,

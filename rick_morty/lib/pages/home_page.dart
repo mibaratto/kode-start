@@ -32,10 +32,12 @@ class _HomePageState extends State<HomePage> {
         future: characters,
         builder: (context, AsyncSnapshot<PaginatedCharacters> snapshot) {
           if (snapshot.hasData) {
-            print("snapshot.hasData");
             final dataResults = snapshot.data!.results;
-            print(dataResults);
+            print('dataResults: $dataResults');
+            var length = dataResults.length;
+            print('dataResults.length: $length');
             return ListView.builder(
+              itemCount: dataResults.length,
               padding: const EdgeInsets.symmetric(vertical: 7.5),
               itemBuilder: (context, index) {
                 return CharacterCard(
@@ -48,7 +50,6 @@ class _HomePageState extends State<HomePage> {
                   },
                 );
               },
-              itemCount: dataResults.length,
             );
           } else if (snapshot.hasError) {
             print("snapshot.hasError");
