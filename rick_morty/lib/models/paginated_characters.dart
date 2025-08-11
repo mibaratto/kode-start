@@ -1,52 +1,28 @@
+import 'package:rick_morty/models/detailed_character.dart';
+
 class PaginatedCharacters {
   PaginatedCharacters({
     required this.count,
     required this.pages,
     required this.next,
     required this.prev,
-    required this.results,
+    required this.charactersList,
   });
   final int count;
   final int pages;
   final String? next;
   final String? prev;
-  final List<Character> results;
+  final List<DetailedCharacter> charactersList;
 
-  factory PaginatedCharacters.fromJson(Map<String, dynamic> json) {
+  factory PaginatedCharacters.fromJson(Map<String, dynamic> apiData) {
     return PaginatedCharacters(
-      count: json['info']['count'],
-      pages: json['info']['pages'],
-      next: json['info']['next'],
-      prev: json['info']['prev'],
-      results: List.from(
-        json['results'],
-      ).map((e) => Character.fromJson(e)).toList(),
+      count: apiData['info']['count'],
+      pages: apiData['info']['pages'],
+      next: apiData['info']['next'],
+      prev: apiData['info']['prev'],
+      charactersList: List.from(
+        apiData['results'],
+      ).map((e) => DetailedCharacter.fromJson(e)).toList(),
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'count': count,
-      'pages': pages,
-      'next': next,
-      'prev': prev,
-      'results': results.map((e) => e.toJson()).toList(),
-    };
-  }
-}
-
-class Character {
-  Character({required this.image, required this.id, required this.name});
-
-  final String image;
-  final int id;
-  final String name;
-
-  factory Character.fromJson(Map<String, dynamic> json) {
-    return Character(image: json['image'], id: json['id'], name: json['name']);
-  }
-
-  Map<String, dynamic> toJson() {
-    return {'image': image, 'id': id, 'name': name};
   }
 }

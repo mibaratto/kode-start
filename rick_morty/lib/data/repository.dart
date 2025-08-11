@@ -9,11 +9,20 @@ abstract class Repository {
 
   static Future<PaginatedCharacters> getCharacters({int page = 1}) async {
     var response = await _dio.get("/character?page=$page");
+    print('DEBUG: response: $response');
+    print('DEBUG: response: ${response.toString()}');
     return PaginatedCharacters.fromJson(response.data);
   }
 
   static Future<DetailedCharacter> getCharacterDetails(int characterId) async {
     var response = await _dio.get("/character/$characterId");
+    print('DEBUG: response: $response');
+    print('DEBUG: response: ${response.toString()}');
     return DetailedCharacter.fromJson(response.data);
+  }
+
+  static Future<PaginatedCharacters> searchCharacters(String name) async {
+    var response = await _dio.get("/character?name=$name");
+    return PaginatedCharacters.fromJson(response.data);
   }
 }

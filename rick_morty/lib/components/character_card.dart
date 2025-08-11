@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:rick_morty/models/paginated_characters.dart';
+import 'package:rick_morty/models/detailed_character.dart';
 import 'package:rick_morty/theme/app_colors.dart';
 
 class CharacterCard extends StatelessWidget {
   const CharacterCard({required this.character, required this.onTap, Key? key})
     : super(key: key);
 
-  final Character character;
+  final DetailedCharacter character;
   final void Function() onTap;
 
   @override

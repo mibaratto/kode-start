@@ -21,31 +21,17 @@ class DetailedCharacter {
   final String location;
   final String gender;
 
-  factory DetailedCharacter.fromJson(Map<String, dynamic> json) {
+  factory DetailedCharacter.fromJson(Map<String, dynamic> characterData) {
     return DetailedCharacter(
-      image: json['image'],
-      id: json['id'],
-      status: json['status'],
-      name: json['name'],
-      species: json['species'],
-      origin: json['origin']['name'],
-      episodePath: json['episode'][0] as String,
-      location: json['location']['name'],
-      gender: json['gender'],
+      image: characterData['image'],
+      id: characterData['id'],
+      status: characterData['status'],
+      name: characterData['name'],
+      species: characterData['species'],
+      origin: characterData['origin']['name'],
+      episodePath: characterData['episode'][0] as String,
+      location: characterData['location']['name'],
+      gender: characterData['gender'],
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'image': image,
-      'id': id,
-      'status': status,
-      'name': name,
-      'species': species,
-      'origin': origin,
-      'location': location,
-      'episodePath': episodePath,
-      'gender': gender,
-    };
   }
 }
