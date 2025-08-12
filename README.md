@@ -11,7 +11,7 @@ Esse projeto é uma aplicação Flutter para fãs de Rick & Morty, com base na R
 - Busca de personagens por nome.
 
 ## Vídeo demonstrando as funcionalidades:
-
+https://github.com/user-attachments/assets/e4e568f5-4b36-4b15-919e-e15be6be3443
 
 ## Bibliotecas:
 - Dio biblioteca para chamadas de API,
