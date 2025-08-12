@@ -1,16 +1,19 @@
-# rick_morty
+# DESAFIO KODE START 2025
 
-A new Flutter project.
+## Descrição geral:
+Esse projeto é uma aplicação Flutter para fãs de Rick & Morty, com base na Rick and Morty API (REST). 
+ 
+## Funcionalidades implementadas:
+- Listagem de personagens com scroll infinito,
+- Card com nome e imagem na home,
+- Tela de detalhes do personagem com nome, imagem, espécie, gênero, status, origem, última localização e primeira aparição,
+- Navegação entre a tela com a listagem dos personagens e a tela de detalhes,
+- Busca de personagens por nome.
 
-## Getting Started
+## Vídeo demonstrando as funcionalidades:
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Bibliotecas:
+- Dio biblioteca para chamadas de API,
+- Material Design para desenvolvimento do design de interface,
+- Testes unitários com flutter_test
