@@ -38,6 +38,7 @@ class _DetailedCharacterCardState extends State<DetailedCharacterCard> {
   @override
   Widget build(BuildContext context) {
     final character = widget.detailedCharacter;
+    var iconColor = character.status == 'Alive' ? Colors.green : Colors.red;
 
     return Card(
       color: AppColors.primaryColorLight,
@@ -53,6 +54,7 @@ class _DetailedCharacterCardState extends State<DetailedCharacterCard> {
             character.image,
             width: double.infinity, // ocupa toda a largura do card
             fit: BoxFit.cover,
+            height: 180,
           ),
           Padding(
             padding: const EdgeInsets.only(
@@ -65,46 +67,97 @@ class _DetailedCharacterCardState extends State<DetailedCharacterCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "name: ${character.name.toUpperCase()}",
+                  character.name.toUpperCase(),
                   style: TextStyle(
                     color: AppColors.white,
                     fontWeight: FontWeight.w900,
                     fontSize: 14.5,
                   ),
                 ),
+                const SizedBox(height: 38),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      margin: const EdgeInsets.only(right: 4),
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.white,
+                            width: 1.5,
+                            strokeAlign: BorderSide.strokeAlignOutside,
+                          ), // Contorno preto com largura 2.0
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Icon(Icons.circle, size: 8, color: iconColor),
+                      ),
+                    ),
+                    Text(
+                      ' ${character.status} - ${character.species} - ${character.gender}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12.5,
+                        color: AppColors.white,
+                      ),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 15),
                 Text(
-                  "species: ${character.species.toUpperCase()}",
+                  'Origin:',
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                    height: 1.5,
+                    fontWeight: FontWeight.w300,
                     fontSize: 12.5,
                     color: AppColors.white,
                   ),
                 ),
                 Text(
-                  "gender: ${character.gender.toUpperCase()}",
+                  character.origin,
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                    height: 1.5,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12.5,
+                    color: AppColors.white,
+                  ),
+                ),
+                const SizedBox(height: 15),
+                Text(
+                  'Last known location:',
+                  style: TextStyle(
+                    height: 1.5,
+                    fontWeight: FontWeight.w300,
                     fontSize: 12.5,
                     color: AppColors.white,
                   ),
                 ),
                 Text(
-                  "status: ${character.status.toUpperCase()}",
+                  character.location,
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                    height: 1.5,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12.5,
+                    color: AppColors.white,
+                  ),
+                ),
+                const SizedBox(height: 15),
+                Text(
+                  """First seen in:""",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w300,
                     fontSize: 12.5,
                     color: AppColors.white,
                   ),
                 ),
                 Text(
-                  "first episode: ${episodeName ?? 'Carregando episódio...'}",
+                  '$episodeName',
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                     fontSize: 12.5,
                     color: AppColors.white,
                   ),
                 ),
+                const SizedBox(height: 15),
               ],
             ),
           ),

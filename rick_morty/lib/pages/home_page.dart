@@ -4,7 +4,6 @@ import 'package:rick_morty/components/character_card.dart';
 import 'package:rick_morty/components/search_bar.dart';
 import 'package:rick_morty/data/repository.dart';
 import 'package:rick_morty/models/detailed_character.dart';
-// import 'package:rick_morty/models/paginated_characters.dart';
 import 'package:rick_morty/pages/details_page.dart';
 import 'package:rick_morty/theme/app_colors.dart';
 

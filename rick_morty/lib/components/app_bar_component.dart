@@ -23,7 +23,7 @@ PreferredSizeWidget appBarComponent(
         },
         child: Icon(
           isSecondPage ? Icons.arrow_back : Icons.menu,
-          color: AppColors.white,
+          color: AppColors.whiteOff,
         ),
       ),
     ),
@@ -31,7 +31,14 @@ PreferredSizeWidget appBarComponent(
       Container(
         alignment: Alignment.topCenter,
         margin: const EdgeInsets.only(right: 16),
-        child: Icon(Icons.person, color: AppColors.white),
+        child: Image.asset(AppImages.icon),
+        // child: Icon(
+        //   Icons.account_circle_outlined,
+        //   color: Color(0xffCAC4D0),
+        //   size: 26.2,
+        //   weight: 100,
+        //   fill: 0,
+        // ),
       ),
     ],
     flexibleSpace: SafeArea(
@@ -41,8 +48,12 @@ PreferredSizeWidget appBarComponent(
           Padding(
             padding: const EdgeInsets.only(top: 10),
             child: Text(
-              "Rick and Morty App",
-              style: TextStyle(color: AppColors.white),
+              "RICK AND MORTY API",
+              style: TextStyle(
+                fontSize: 14.5,
+                fontWeight: FontWeight.w400,
+                color: AppColors.white,
+              ),
             ),
           ),
         ],

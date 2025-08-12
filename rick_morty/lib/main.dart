@@ -17,13 +17,11 @@ class RickMortyApp extends StatelessWidget {
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case HomePage.routeId:
-            print(HomePage.routeId);
             return MaterialPageRoute(
               settings: settings,
               builder: (context) => const HomePage(),
             );
           case DetailsPage.routeId:
-            print('hi case c2');
             int movieId = settings.arguments as int;
             return MaterialPageRoute(
               settings: settings,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/app_colors.dart';
 
 class CharacterSearchBar extends StatelessWidget {
   final Function(String) onSearch;
@@ -12,8 +13,9 @@ class CharacterSearchBar extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: TextField(
         decoration: InputDecoration(
-          hintText: 'Buscar por nome',
-          prefixIcon: Icon(Icons.search),
+          hintText: 'Busque um personagem pelo nome',
+          hintStyle: TextStyle(fontSize: 16.0, color: AppColors.whiteOff),
+          prefixIcon: Icon(Icons.search, color: AppColors.whiteOff),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         ),
         onSubmitted: onSearch,
