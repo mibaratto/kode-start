@@ -12,6 +12,7 @@ class CharacterSearchBar extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: TextField(
+        style: TextStyle(color: AppColors.whiteOff),
         decoration: InputDecoration(
           hintText: 'Busque um personagem pelo nome',
           hintStyle: TextStyle(fontSize: 16.0, color: AppColors.whiteOff),

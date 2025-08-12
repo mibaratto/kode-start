@@ -54,14 +54,14 @@ class _DetailedCharacterCardState extends State<DetailedCharacterCard> {
             character.image,
             width: double.infinity, // ocupa toda a largura do card
             fit: BoxFit.cover,
-            height: 180,
+            height: 200,
           ),
           Padding(
             padding: const EdgeInsets.only(
               top: 12,
               left: 16,
               right: 16,
-              bottom: 20,
+              bottom: 43,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,7 +142,7 @@ class _DetailedCharacterCardState extends State<DetailedCharacterCard> {
                 ),
                 const SizedBox(height: 15),
                 Text(
-                  """First seen in:""",
+                  'First seen in:',
                   style: TextStyle(
                     fontWeight: FontWeight.w300,
                     fontSize: 12.5,

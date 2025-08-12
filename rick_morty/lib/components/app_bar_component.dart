@@ -31,14 +31,7 @@ PreferredSizeWidget appBarComponent(
       Container(
         alignment: Alignment.topCenter,
         margin: const EdgeInsets.only(right: 16),
-        child: Image.asset(AppImages.icon),
-        // child: Icon(
-        //   Icons.account_circle_outlined,
-        //   color: Color(0xffCAC4D0),
-        //   size: 26.2,
-        //   weight: 100,
-        //   fill: 0,
-        // ),
+        child: Image.asset(AppImages.icon, height: 26),
       ),
     ],
     flexibleSpace: SafeArea(
