@@ -27,7 +27,7 @@ class CharacterCard extends StatelessWidget {
               character.image,
               width: double.infinity, // ocupa toda a largura do card
               fit: BoxFit.cover,
-              height: 140,
+              height: 180,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
